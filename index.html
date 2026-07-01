@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noah — Designer, Game Maker, Editor, Sound, Writer</title>
+
+<!-- ============================================================
+     FONTS
+     Loaded from Google Fonts. Swap these out by changing the
+     link below and the --font-* variables in the CSS.
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. DESIGN TOKENS
+   Change colors/fonts here and the whole site updates.
+   Each discipline has its own accent so sections stay
+   visually distinct as you scroll.
+   ============================================================ */
+:root{
+  --paper:#F7F5F0;        /* page background  */
+  --ink:#17171F;          /* main text        */
+  --ink-soft:#5A5A66;     /* secondary text   */
+  --line:rgba(23,23,31,.12);
+  --card:#FFFFFF;
+
+  --c-ux:#3B36E0;         /* UI / UX     – indigo */
+  --c-game:#E0483B;       /* Game design – red    */
+  --c-edit:#11998E;       /* Editing     – teal   */
+  --c-rec:#E08A2B;        /* Recording   – amber  */
+  --c-write:#8B3BE0;      /* Writing     – violet */
+
+  --font-display:'Space Grotesk',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+
+  --max:1100px;
+}
+
+/* ============================================================
+   2. BASE / RESET
+   ============================================================ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+/* ============================================================
+   3. NAV
+   ============================================================ */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(247,245,240,.85);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav .brand{font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:-.02em}
+.nav ul{display:flex;gap:22px;list-style:none}
+.nav a{
+  font-family:var(--font-mono);font-size:12px;text-transform:uppercase;
+  letter-spacing:.04em;text-decoration:none;color:var(--ink-soft);
+  transition:color .15s;
+}
+.nav a:hover{color:var(--ink)}
+@media(max-width:720px){.nav ul{display:none}}
+
+/* ============================================================
+   4. HERO
+   ============================================================ */
+.hero{padding:90px 0 70px;border-bottom:1px solid var(--line)}
+.hero .label{
+  font-family:var(--font-mono);font-size:13px;color:var(--ink-soft);
+  letter-spacing:.04em;margin-bottom:20px;
+}
+.hero h1{
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.02;
+  letter-spacing:-.03em;max-width:14ch;
+}
+.hero h1 em{font-style:normal;color:var(--ink-soft)}
+.hero p{
+  margin-top:26px;max-width:46ch;font-size:1.05rem;color:var(--ink-soft);
+}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.tag{
+  font-family:var(--font-mono);font-size:12px;text-decoration:none;
+  padding:7px 14px;border-radius:999px;border:1.5px solid;
+  transition:transform .15s,background .15s;
+}
+.tag:hover{transform:translateY(-2px)}
+.tag.ux{color:var(--c-ux);border-color:var(--c-ux)}
+.tag.game{color:var(--c-game);border-color:var(--c-game)}
+.tag.edit{color:var(--c-edit);border-color:var(--c-edit)}
+.tag.rec{color:var(--c-rec);border-color:var(--c-rec)}
+.tag.write{color:var(--c-write);border-color:var(--c-write)}
+
+/* ============================================================
+   5. DISCIPLINE SECTIONS
+   The colored eyebrow + left rule is the through-line that
+   tells each section apart. Set --c on the <section> and
+   every accent below inherits it.
+   ============================================================ */
+.section{padding:72px 0;border-bottom:1px solid var(--line)}
+.section .eyebrow{
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--c);
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.section .eyebrow::before{
+  content:"";width:26px;height:2px;background:var(--c);display:inline-block;
+}
+.section h2{
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(1.7rem,3.5vw,2.4rem);letter-spacing:-.02em;
+}
+.section .intro{max-width:50ch;margin-top:12px;color:var(--ink-soft)}
+
+/* card grids */
+.grid{display:grid;gap:22px;margin-top:36px}
+.grid.two{grid-template-columns:repeat(2,1fr)}
+.grid.three{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){.grid.two,.grid.three{grid-template-columns:1fr}}
+
+/* base card */
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  overflow:hidden;transition:transform .18s,box-shadow .18s;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(23,23,31,.10)}
+.card .thumb{aspect-ratio:16/10;background:#eee;border-bottom:1px solid var(--line);object-fit:cover;width:100%}
+.card .body{padding:18px 20px}
+.card h3{font-family:var(--font-display);font-size:1.15rem;letter-spacing:-.01em}
+.card .meta{font-family:var(--font-mono);font-size:11px;color:var(--c);margin-top:6px;letter-spacing:.03em}
+.card p{font-size:.95rem;color:var(--ink-soft);margin-top:10px}
+.card .links{margin-top:14px;display:flex;gap:16px}
+.card .links a{
+  font-family:var(--font-mono);font-size:12px;text-decoration:none;color:var(--c);
+  border-bottom:1.5px solid transparent;transition:border-color .15s;
+}
+.card .links a:hover{border-color:var(--c)}
+
+/* responsive video / iframe embed */
+.embed{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-bottom:1px solid var(--line)}
+.embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* audio card */
+.card audio{width:100%;margin-top:14px}
+
+/* writing card (text-led, no thumb) */
+.card.text .body{padding:24px 22px}
+.card.text blockquote{
+  font-family:var(--font-display);font-weight:400;font-size:1.1rem;
+  line-height:1.45;color:var(--ink);border-left:3px solid var(--c);
+  padding-left:16px;margin:14px 0;
+}
+
+/* ============================================================
+   6. CONTACT / FOOTER
+   ============================================================ */
+.contact{padding:80px 0}
+.contact h2{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.02em}
+.contact p{color:var(--ink-soft);margin-top:14px;max-width:42ch}
+.contact .links{margin-top:28px;display:flex;flex-wrap:wrap;gap:14px}
+.contact .links a{
+  font-family:var(--font-mono);font-size:13px;text-decoration:none;
+  padding:10px 18px;border:1.5px solid var(--ink);border-radius:999px;
+  transition:background .15s,color .15s;
+}
+.contact .links a:hover{background:var(--ink);color:var(--paper)}
+footer{border-top:1px solid var(--line);padding:28px 0;font-family:var(--font-mono);font-size:12px;color:var(--ink-soft)}
+
+/* keyboard focus + reduced motion (accessibility floor) */
+a:focus-visible,button:focus-visible{outline:2px solid var(--c-ux);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ========================== NAV ========================== -->
+<nav class="nav">
+  <div class="wrap">
+    <span class="brand">Noah</span>
+    <ul>
+      <li><a href="#ux">UI/UX</a></li>
+      <li><a href="#game">Games</a></li>
+      <li><a href="#edit">Editing</a></li>
+      <li><a href="#rec">Recording</a></li>
+      <li><a href="#write">Writing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ========================== HERO ========================= -->
+<header class="hero">
+  <div class="wrap">
+    <p class="label">// portfolio — multidisciplinary maker</p>
+    <h1>I design interfaces, build games, cut video, shape sound, <em>and write.</em></h1>
+    <p>A home for the things I make across five disciplines. Pick a track below, or scroll through the lot.</p>
+    <div class="tags">
+      <a href="#ux" class="tag ux">UI / UX</a>
+      <a href="#game" class="tag game">Game Design</a>
+      <a href="#edit" class="tag edit">Editing</a>
+      <a href="#rec" class="tag rec">Recording</a>
+      <a href="#write" class="tag write">Writing</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===================== UI / UX =========================
+     Image-led case studies. Swap the placeholder <img src>
+     with a screenshot or mockup. Each card duplicates cleanly.
+     ====================================================== -->
+<section id="ux" class="section" style="--c:var(--c-ux)">
+  <div class="wrap">
+    <p class="eyebrow">UI / UX Design</p>
+    <h2>Interfaces &amp; product work</h2>
+    <p class="intro">Flows, wireframes, and shipped screens. Each card links to a case study or live prototype.</p>
+
+    <div class="grid two">
+      <article class="card">
+        <img class="thumb" src="https://placehold.co/600x375/3B36E0/FFFFFF?text=Project+Screenshot" alt="Screenshot of the project interface">
+        <div class="body">
+          <h3>Project Name</h3>
+          <p class="meta">FIGMA · PROTOTYPE · 2025</p>
+          <p>One or two lines on the problem and what you designed. Keep it concrete.</p>
+          <div class="links">
+            <a href="#">Case study →</a>
+            <a href="#">Live prototype →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img class="thumb" src="https://placehold.co/600x375/3B36E0/FFFFFF?text=Project+Screenshot" alt="Screenshot of the project interface">
+        <div class="body">
+          <h3>Another Project</h3>
+          <p class="meta">UX RESEARCH · UI · 2025</p>
+          <p>Duplicate this whole &lt;article&gt; block to add more.</p>
+          <div class="links"><a href="#">View →</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GAME DESIGN =====================
+     Thumbnail + tags + links to itch.io / a playable build.
+     For an embedded itch.io widget, paste their iframe into
+     a .embed block like the video section below.
+     ====================================================== -->
+<section id="game" class="section" style="--c:var(--c-game)">
+  <div class="wrap">
+    <p class="eyebrow">Game Design</p>
+    <h2>Games &amp; prototypes</h2>
+    <p class="intro">Built solo in Unity (C#) under Forgetful Studios. Each card links to a playable build or devlog.</p>
+
+    <div class="grid three">
+      <article class="card">
+        <img class="thumb" src="https://placehold.co/600x375/E0483B/FFFFFF?text=Game+Capsule" alt="Cover art for the game">
+        <div class="body">
+          <h3>Blink Thief</h3>
+          <p class="meta">UNITY · C# · PLATFORMER</p>
+          <p>A ninja teleportation platformer. One line on the hook.</p>
+          <div class="links">
+            <a href="#">Play on itch.io →</a>
+            <a href="#">Devlog →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img class="thumb" src="https://placehold.co/600x375/E0483B/FFFFFF?text=Game+Capsule" alt="Cover art for the game">
+        <div class="body">
+          <h3>Tower Climber</h3>
+          <p class="meta">UNITY · C# · 2D</p>
+          <p>Celeste-style movement, Jump King difficulty.</p>
+          <div class="links"><a href="#">Trailer →</a></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <img class="thumb" src="https://placehold.co/600x375/E0483B/FFFFFF?text=Game+Capsule" alt="Cover art for the game">
+        <div class="body">
+          <h3>Prototype</h3>
+          <p class="meta">GAME JAM · 48H</p>
+          <p>Short experiments live here too.</p>
+          <div class="links"><a href="#">View →</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EDITING =========================
+     Responsive video embeds. Paste a YouTube/Vimeo "embed"
+     URL into the src below (use the /embed/ form, not the
+     normal watch URL).
+     ====================================================== -->
+<section id="edit" class="section" style="--c:var(--c-edit)">
+  <div class="wrap">
+    <p class="eyebrow">Video Editing</p>
+    <h2>Edits &amp; motion work</h2>
+    <p class="intro">Cuts, color, and pacing. Each embed plays inline.</p>
+
+    <div class="grid two">
+      <article class="card">
+        <div class="embed">
+          <!-- Replace VIDEO_ID with a real YouTube id -->
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video edit" allowfullscreen></iframe>
+        </div>
+        <div class="body">
+          <h3>Edit Title</h3>
+          <p class="meta">PREMIERE PRO · 2025</p>
+          <p>Context: what it was for, what you cut.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="embed">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video edit" allowfullscreen></iframe>
+        </div>
+        <div class="body">
+          <h3>Another Edit</h3>
+          <p class="meta">DAVINCI RESOLVE · 2025</p>
+          <p>Short line on the project.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RECORDING =======================
+     Two options shown: a native <audio> player for files you
+     host yourself, and an iframe for a podcast platform.
+     ====================================================== -->
+<section id="rec" class="section" style="--c:var(--c-rec)">
+  <div class="wrap">
+    <p class="eyebrow">Recording &amp; Sound</p>
+    <h2>Audio &amp; sound stories</h2>
+    <p class="intro">Voice work, podcasts, and sound design. Press play.</p>
+
+    <div class="grid two">
+      <article class="card">
+        <div class="body">
+          <h3>Sonic Blend — Episode</h3>
+          <p class="meta">SOUND STORY · 2025</p>
+          <p>One line on the piece and your role.</p>
+          <!-- Native player: point src at your .mp3 file -->
+          <audio controls src="your-audio-file.mp3">Your browser doesn't support audio.</audio>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="body">
+          <h3>Podcast Embed</h3>
+          <p class="meta">SPOTIFY / SOUNDCLOUD</p>
+          <p>For hosted shows, paste the platform's embed iframe.</p>
+          <!-- Example placeholder: replace with a real embed iframe -->
+          <div class="embed" style="aspect-ratio:auto;height:152px">
+            <iframe src="" title="Podcast episode" style="border-radius:8px"></iframe>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WRITING =========================
+     Text-led cards. Lead with a pulled excerpt, link out to
+     the full piece.
+     ====================================================== -->
+<section id="write" class="section" style="--c:var(--c-write)">
+  <div class="wrap">
+    <p class="eyebrow">Writing</p>
+    <h2>Words &amp; stories</h2>
+    <p class="intro">Scripts, fiction, essays. A line of each, with a link to read the rest.</p>
+
+    <div class="grid two">
+      <article class="card text">
+        <div class="body">
+          <h3>Piece Title</h3>
+          <p class="meta">SHORT FICTION · 2025</p>
+          <blockquote>“Drop in a striking opening line or pulled quote here — make a reader want the rest.”</blockquote>
+          <div class="links"><a href="#">Read full piece →</a></div>
+        </div>
+      </article>
+
+      <article class="card text">
+        <div class="body">
+          <h3>Essay Title</h3>
+          <p class="meta">ESSAY · 2025</p>
+          <blockquote>“Another excerpt. Duplicate the card to add more.”</blockquote>
+          <div class="links"><a href="#">Read on Medium →</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== CONTACT ========================== -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2>Let's make something.</h2>
+    <p>Available for collaborations, commissions, and the occasional half-baked idea.</p>
+    <div class="links">
+      <a href="mailto:you@email.com">Email</a>
+      <a href="#">itch.io</a>
+      <a href="#">YouTube</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Noah · built with HTML &amp; CSS</div>
+</footer>
+
+</body>
+</html>
