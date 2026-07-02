@@ -14,8 +14,8 @@
   --c-game:#3B36E0;         /* UI / UX     – indigo */
   --c-rec:#E0483B;       /* Game design – red    */
   --c-edit:#11998E;       /* Editing     – teal   */
-  --c-ux:#E08A2B;        /* Recording   – amber  */
-  --c-write:#8B3BE0;      /* Writing     – violet */
+  --c-write:#E08A2B;        /* Recording   – amber  */
+  --c-ux:#8B3BE0;      /* Writing     – violet */
 
   --font-display:'Space Grotesk',sans-serif;
   --font-body:'Inter',sans-serif;
