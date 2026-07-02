@@ -213,28 +213,7 @@ body.pt-exit-back{
 .grid .reveal:nth-child(6){transition-delay:.39s}
 
 /* ============================================================
-   9. CUSTOM CURSOR
-   Only active on fine-pointer (mouse) devices — script.js adds
-   .has-cursor to <body> to opt in, so touch/mobile is untouched.
-   ============================================================ */
-body.has-cursor{cursor:none}
-body.has-cursor a,body.has-cursor button{cursor:none}
-.cursor-dot,.cursor-ring{
-  position:fixed;top:0;left:0;pointer-events:none;z-index:200;
-  border-radius:50%;
-}
-.cursor-dot{width:6px;height:6px;background:var(--ink);transition:opacity .2s}
-.cursor-ring{
-  width:34px;height:34px;border:1.5px solid var(--ink);
-  transition:width .25s,height .25s,border-color .25s,opacity .2s;
-  opacity:.45;
-}
-body.cursor-hover .cursor-ring{width:56px;height:56px;border-color:var(--c,var(--ink));opacity:.9}
-body.cursor-hover .cursor-dot{opacity:0}
-@media(pointer:coarse){.cursor-dot,.cursor-ring{display:none}}
-
-/* ============================================================
-   10. SEE ALL BUTTON + BACK LINK + SUBPAGE HEADER
+   9. SEE ALL BUTTON + BACK LINK + SUBPAGE HEADER
    ============================================================ */
 .see-all{
   display:inline-flex;align-items:center;gap:8px;margin-top:30px;
@@ -260,5 +239,4 @@ body.cursor-hover .cursor-dot{opacity:0}
 @media(prefers-reduced-motion:reduce){
   body.pt-enter-forward,body.pt-enter-back,body.pt-exit-forward,body.pt-exit-back{transition:none!important;transform:none!important;opacity:1!important}
   .reveal{opacity:1!important;transform:none!important;transition:none!important}
-  .cursor-dot,.cursor-ring{display:none!important}
 }

@@ -52,33 +52,4 @@
     revealEls.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  /* ---------- 3. Custom cursor (fine pointer only) ---------- */
-  if (window.matchMedia && matchMedia('(pointer:fine)').matches) {
-    var dot = document.createElement('div');
-    dot.className = 'cursor-dot';
-    var ring = document.createElement('div');
-    ring.className = 'cursor-ring';
-    document.body.appendChild(dot);
-    document.body.appendChild(ring);
-    document.body.classList.add('has-cursor');
-
-    var mx = window.innerWidth / 2, my = window.innerHeight / 2, rx = mx, ry = my;
-
-    window.addEventListener('mousemove', function (e) {
-      mx = e.clientX; my = e.clientY;
-      dot.style.transform = 'translate(' + mx + 'px,' + my + 'px) translate(-50%,-50%)';
-    });
-
-    (function loop() {
-      rx += (mx - rx) * 0.16;
-      ry += (my - ry) * 0.16;
-      ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px) translate(-50%,-50%)';
-      requestAnimationFrame(loop);
-    })();
-
-    document.querySelectorAll('a, button, .card').forEach(function (el) {
-      el.addEventListener('mouseenter', function () { document.body.classList.add('cursor-hover'); });
-      el.addEventListener('mouseleave', function () { document.body.classList.remove('cursor-hover'); });
-    });
-  }
 })();
