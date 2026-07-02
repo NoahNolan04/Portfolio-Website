@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UI/UX Work — Noah</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+
+<body>
+<script>(function(){var d=sessionStorage.getItem('pt-direction');if(d){document.body.classList.add(d==='back'?'pt-enter-back':'pt-enter-forward');sessionStorage.removeItem('pt-direction');}})();</script>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand" data-transition="back">Noah</a>
+    <ul>
+      <li><a href="ux.html" class="active" style="--c:var(--c-ux)">UI/UX</a></li>
+      <li><a href="games.html" data-transition="forward">Games</a></li>
+      <li><a href="editing.html" data-transition="forward">Editing</a></li>
+      <li><a href="recording.html" data-transition="forward">Recording</a></li>
+      <li><a href="writing.html" data-transition="forward">Writing</a></li>
+      <li><a href="index.html#contact" data-transition="back">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+<section class="section page-header" style="--c:var(--c-ux); border-top:none">
+  <div class="wrap">
+    <a href="index.html" class="back-link" data-transition="back">
+      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back to overview
+    </a>
+    <p class="eyebrow">UI / UX Design</p>
+    <h2>All UI/UX work</h2>
+    <p class="intro">The full collection — every project, case study, and prototype.</p>
+
+    <div class="grid two">
+      <article class="card reveal">
+        <img class="thumb" src="https://placehold.co/600x375/3B36E0/FFFFFF?text=Project+Screenshot" alt="Screenshot of the project interface">
+        <div class="body">
+          <h3>Project Name</h3>
+          <p class="meta">FIGMA · PROTOTYPE · 2025</p>
+          <p>One or two lines on the problem and what you designed. Keep it concrete.</p>
+          <div class="links">
+            <a href="#">Case study →</a>
+            <a href="#">Live prototype →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <img class="thumb" src="https://placehold.co/600x375/3B36E0/FFFFFF?text=Project+Screenshot" alt="Screenshot of the project interface">
+        <div class="body">
+          <h3>Another Project</h3>
+          <p class="meta">UX RESEARCH · UI · 2025</p>
+          <p>Duplicate this whole &lt;article&gt; block to add more.</p>
+          <div class="links"><a href="#">View →</a></div>
+        </div>
+      </article>
+
+      <!-- Add more UI/UX project cards here — copy an <article class="card reveal"> block above -->
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Noah · built with HTML &amp; CSS</div>
+</footer>
+
+</body>
+</html>

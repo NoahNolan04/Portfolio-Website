@@ -1,0 +1,264 @@
+/* ============================================================
+   1. DESIGN TOKENS
+   Change colors/fonts here and the whole site updates.
+   Each discipline has its own accent so sections stay
+   visually distinct as you scroll.
+   ============================================================ */
+:root{
+  --paper:#F7F5F0;        /* page background  */
+  --ink:#17171F;          /* main text        */
+  --ink-soft:#5A5A66;     /* secondary text   */
+  --line:rgba(23,23,31,.12);
+  --card:#FFFFFF;
+
+  --c-ux:#3B36E0;         /* UI / UX     – indigo */
+  --c-game:#E0483B;       /* Game design – red    */
+  --c-edit:#11998E;       /* Editing     – teal   */
+  --c-rec:#E08A2B;        /* Recording   – amber  */
+  --c-write:#8B3BE0;      /* Writing     – violet */
+
+  --font-display:'Space Grotesk',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+
+  --max:1100px;
+}
+
+/* ============================================================
+   2. BASE / RESET
+   ============================================================ */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--paper);overflow-x:hidden}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+/* ============================================================
+   3. NAV
+   ============================================================ */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(247,245,240,.85);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav .brand{font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:-.02em;text-decoration:none}
+.nav ul{display:flex;gap:22px;list-style:none}
+.nav a{
+  font-family:var(--font-mono);font-size:12px;text-transform:uppercase;
+  letter-spacing:.04em;text-decoration:none;color:var(--ink-soft);
+  transition:color .15s;
+}
+.nav a:hover{color:var(--ink)}
+.nav a.active{color:var(--ink);padding-bottom:4px;border-bottom:1.5px solid var(--c,var(--ink))}
+@media(max-width:720px){.nav ul{display:none}}
+
+/* ============================================================
+   4. HERO
+   ============================================================ */
+.hero{padding:90px 0 70px;border-bottom:1px solid var(--line)}
+.hero .label{
+  font-family:var(--font-mono);font-size:13px;color:var(--ink-soft);
+  letter-spacing:.04em;margin-bottom:20px;
+}
+.hero h1{
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.02;
+  letter-spacing:-.03em;max-width:14ch;
+}
+.hero h1 em{font-style:normal;color:var(--ink-soft)}
+.hero p{
+  margin-top:26px;max-width:46ch;font-size:1.05rem;color:var(--ink-soft);
+}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.tag{
+  font-family:var(--font-mono);font-size:12px;text-decoration:none;
+  padding:7px 14px;border-radius:999px;border:1.5px solid;
+  transition:transform .15s,background .15s;
+}
+.tag:hover{transform:translateY(-2px)}
+.tag.ux{color:var(--c-ux);border-color:var(--c-ux)}
+.tag.game{color:var(--c-game);border-color:var(--c-game)}
+.tag.edit{color:var(--c-edit);border-color:var(--c-edit)}
+.tag.rec{color:var(--c-rec);border-color:var(--c-rec)}
+.tag.write{color:var(--c-write);border-color:var(--c-write)}
+
+/* ============================================================
+   5. DISCIPLINE SECTIONS
+   The colored eyebrow + left rule is the through-line that
+   tells each section apart. Set --c on the <section> and
+   every accent below inherits it.
+   ============================================================ */
+.section{padding:72px 0;border-bottom:1px solid var(--line)}
+.section .eyebrow{
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--c);
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.section .eyebrow::before{
+  content:"";width:26px;height:2px;background:var(--c);display:inline-block;
+}
+.section h2{
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(1.7rem,3.5vw,2.4rem);letter-spacing:-.02em;
+}
+.section .intro{max-width:50ch;margin-top:12px;color:var(--ink-soft)}
+
+/* card grids */
+.grid{display:grid;gap:22px;margin-top:36px}
+.grid.two{grid-template-columns:repeat(2,1fr)}
+.grid.three{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){.grid.two,.grid.three{grid-template-columns:1fr}}
+
+/* base card */
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  overflow:hidden;transition:transform .18s,box-shadow .18s;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(23,23,31,.10)}
+.card .thumb{aspect-ratio:16/10;background:#eee;border-bottom:1px solid var(--line);object-fit:cover;width:100%}
+.card .body{padding:18px 20px}
+.card h3{font-family:var(--font-display);font-size:1.15rem;letter-spacing:-.01em}
+.card .meta{font-family:var(--font-mono);font-size:11px;color:var(--c);margin-top:6px;letter-spacing:.03em}
+.card p{font-size:.95rem;color:var(--ink-soft);margin-top:10px}
+.card .links{margin-top:14px;display:flex;gap:16px}
+.card .links a{
+  font-family:var(--font-mono);font-size:12px;text-decoration:none;color:var(--c);
+  border-bottom:1.5px solid transparent;transition:border-color .15s;
+}
+.card .links a:hover{border-color:var(--c)}
+
+/* responsive video / iframe embed */
+.embed{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-bottom:1px solid var(--line)}
+.embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* audio card */
+.card audio{width:100%;margin-top:14px}
+
+/* writing card (text-led, no thumb) */
+.card.text .body{padding:24px 22px}
+.card.text blockquote{
+  font-family:var(--font-display);font-weight:400;font-size:1.1rem;
+  line-height:1.45;color:var(--ink);border-left:3px solid var(--c);
+  padding-left:16px;margin:14px 0;
+}
+
+/* ============================================================
+   6. CONTACT / FOOTER
+   ============================================================ */
+.contact{padding:80px 0}
+.contact h2{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.02em}
+.contact p{color:var(--ink-soft);margin-top:14px;max-width:42ch}
+.contact .links{margin-top:28px;display:flex;flex-wrap:wrap;gap:14px}
+.contact .links a{
+  font-family:var(--font-mono);font-size:13px;text-decoration:none;
+  padding:10px 18px;border:1.5px solid var(--ink);border-radius:999px;
+  transition:background .15s,color .15s;
+}
+.contact .links a:hover{background:var(--ink);color:var(--paper)}
+footer{border-top:1px solid var(--line);padding:28px 0;font-family:var(--font-mono);font-size:12px;color:var(--ink-soft)}
+
+/* keyboard focus + reduced motion (accessibility floor) */
+a:focus-visible,button:focus-visible{outline:2px solid var(--c-ux);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important}
+}
+
+/* ============================================================
+   7. PAGE TRANSITIONS
+   Directional slide system for multi-page navigation, driven
+   by script.js. 'forward' = moving deeper into a section
+   (slides left). 'back' = returning toward home (slides right).
+   The *-enter-* classes have NO transition of their own — they
+   are the instant "starting position" set before first paint.
+   pt-enter-active is what carries the animated transition.
+   ============================================================ */
+body.pt-enter-forward{transform:translateX(5%);opacity:0}
+body.pt-enter-back{transform:translateX(-5%);opacity:0}
+body.pt-enter-active{
+  transform:translateX(0);opacity:1;
+  transition:transform .6s cubic-bezier(.16,1,.3,1), opacity .5s ease;
+}
+body.pt-exit-forward{
+  transform:translateX(-5%);opacity:0;
+  transition:transform .48s cubic-bezier(.65,0,.35,1), opacity .4s ease;
+}
+body.pt-exit-back{
+  transform:translateX(5%);opacity:0;
+  transition:transform .48s cubic-bezier(.65,0,.35,1), opacity .4s ease;
+}
+
+/* ============================================================
+   8. SCROLL REVEAL
+   Applied to .reveal elements (cards). script.js toggles
+   .is-visible via IntersectionObserver as each scrolls in.
+   Staggered via nth-child delay so grids feel choreographed.
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.is-visible{opacity:1;transform:translateY(0)}
+.grid .reveal:nth-child(1){transition-delay:.04s}
+.grid .reveal:nth-child(2){transition-delay:.11s}
+.grid .reveal:nth-child(3){transition-delay:.18s}
+.grid .reveal:nth-child(4){transition-delay:.25s}
+.grid .reveal:nth-child(5){transition-delay:.32s}
+.grid .reveal:nth-child(6){transition-delay:.39s}
+
+/* ============================================================
+   9. CUSTOM CURSOR
+   Only active on fine-pointer (mouse) devices — script.js adds
+   .has-cursor to <body> to opt in, so touch/mobile is untouched.
+   ============================================================ */
+body.has-cursor{cursor:none}
+body.has-cursor a,body.has-cursor button{cursor:none}
+.cursor-dot,.cursor-ring{
+  position:fixed;top:0;left:0;pointer-events:none;z-index:200;
+  border-radius:50%;
+}
+.cursor-dot{width:6px;height:6px;background:var(--ink);transition:opacity .2s}
+.cursor-ring{
+  width:34px;height:34px;border:1.5px solid var(--ink);
+  transition:width .25s,height .25s,border-color .25s,opacity .2s;
+  opacity:.45;
+}
+body.cursor-hover .cursor-ring{width:56px;height:56px;border-color:var(--c,var(--ink));opacity:.9}
+body.cursor-hover .cursor-dot{opacity:0}
+@media(pointer:coarse){.cursor-dot,.cursor-ring{display:none}}
+
+/* ============================================================
+   10. SEE ALL BUTTON + BACK LINK + SUBPAGE HEADER
+   ============================================================ */
+.see-all{
+  display:inline-flex;align-items:center;gap:8px;margin-top:30px;
+  font-family:var(--font-mono);font-size:13px;letter-spacing:.03em;
+  text-decoration:none;color:var(--c);padding:11px 20px;
+  border:1.5px solid var(--c);border-radius:999px;
+  transition:background .2s,color .2s,transform .2s;
+}
+.see-all svg{width:14px;height:14px;transition:transform .2s}
+.see-all:hover{background:var(--c);color:#fff;transform:translateX(3px)}
+.see-all:hover svg{transform:translateX(3px)}
+
+.back-link{
+  display:inline-flex;align-items:center;gap:6px;margin-bottom:18px;
+  font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);
+  text-decoration:none;transition:color .15s,transform .15s;
+}
+.back-link:hover{color:var(--c);transform:translateX(-3px)}
+
+.page-header{padding-top:56px}
+
+/* new-feature motion opt-out */
+@media(prefers-reduced-motion:reduce){
+  body.pt-enter-forward,body.pt-enter-back,body.pt-exit-forward,body.pt-exit-back{transition:none!important;transform:none!important;opacity:1!important}
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .cursor-dot,.cursor-ring{display:none!important}
+}
