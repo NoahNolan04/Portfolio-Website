@@ -216,11 +216,12 @@ body.pt-exit-back{
    9. SEE ALL BUTTON + BACK LINK + SUBPAGE HEADER
    ============================================================ */
 .see-all{
-  display:inline-flex;align-items:center;gap:8px;margin-top:30px;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:30px;
   font-family:var(--font-mono);font-size:13px;letter-spacing:.03em;
   text-decoration:none;color:var(--c);padding:11px 20px;
   border:1.5px solid var(--c);border-radius:999px;
   transition:background .2s,color .2s,transform .2s;
+  width:230px;
 }
 .see-all svg{width:14px;height:14px;transition:transform .2s}
 .see-all:hover{background:var(--c);color:#fff;transform:translateX(3px)}
