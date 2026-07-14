@@ -10,7 +10,7 @@
   --ink-soft:#5A5A66;     /* secondary text   */
   --line:rgba(23,23,31,.12);
   --card:#FFFFFF;
-  
+
   --c-game:#3B36E0;         /* UI / UX     – indigo */
   --c-rec:#E0483B;       /* Game design – red    */
   --c-edit:#11998E;       /* Editing     – teal   */
@@ -241,3 +241,26 @@ body.pt-exit-back{
   body.pt-enter-forward,body.pt-enter-back,body.pt-exit-forward,body.pt-exit-back{transition:none!important;transform:none!important;opacity:1!important}
   .reveal{opacity:1!important;transform:none!important;transition:none!important}
 }
+
+/* ============================================================
+   10. CONTACT ICON BUTTONS
+   Used in the contact section on every page.
+   ============================================================ */
+.icon-row{display:flex;flex-wrap:wrap;gap:16px;margin-top:28px}
+.icon-btn{
+  display:flex;flex-direction:column;align-items:center;gap:7px;
+  text-decoration:none;color:var(--ink);
+}
+.icon-btn .circle{
+  width:58px;height:58px;border-radius:50%;
+  border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;
+  transition:background .18s,color .18s,transform .18s;
+  color:var(--ink);background:transparent;
+}
+.icon-btn svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.icon-btn .label{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.03em;color:var(--ink-soft);
+  transition:color .18s;
+}
+.icon-btn:hover .circle{background:var(--ink);color:var(--paper);transform:translateY(-3px)}
+.icon-btn:hover .label{color:var(--ink)}

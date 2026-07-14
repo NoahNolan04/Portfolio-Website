@@ -11,27 +11,6 @@
 <link rel="stylesheet" href="style.css">
 <script src="script.js" defer></script>
 
-<style>
-/* Contact icon buttons — scoped to this page (matches contact.html) */
-.icon-row{display:flex;flex-wrap:wrap;gap:16px;margin-top:28px}
-.icon-btn{
-  display:flex;flex-direction:column;align-items:center;gap:7px;
-  text-decoration:none;color:var(--ink);
-}
-.icon-btn .circle{
-  width:58px;height:58px;border-radius:50%;
-  border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;
-  transition:background .18s,color .18s,transform .18s;
-  color:var(--ink);background:transparent;
-}
-.icon-btn svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.icon-btn .label{
-  font-family:var(--font-mono);font-size:11px;letter-spacing:.03em;color:var(--ink-soft);
-  transition:color .18s;
-}
-.icon-btn:hover .circle{background:var(--ink);color:var(--paper);transform:translateY(-3px)}
-.icon-btn:hover .label{color:var(--ink)}
-</style>
 </head>
 
 <body>
@@ -300,7 +279,7 @@
       </a>
 
       <!-- Update the filename below to match your resume PDF in the repo -->
-      <a class="icon-btn" href="Noah Nolan Resume 7_14_2026 copy.pdf" target="_blank" aria-label="View resume PDF">
+      <a class="icon-btn" href="Noah_Nolan_Resume.pdf" target="_blank" aria-label="View resume PDF">
         <span class="circle">
           <svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><line x1="9" y1="12" x2="16" y2="12"/><line x1="9" y1="16" x2="14" y2="16"/></svg>
         </span>
